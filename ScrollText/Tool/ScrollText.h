@@ -21,7 +21,8 @@ extern const  NSTimeInterval BeginTime;
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, assign) NSTextAlignment textAlignment;
 @property (nonatomic, strong) UIFont *font;
-@property (nonatomic, assign) NSTimeInterval timeInterval;
+@property (nonatomic, assign) CGFloat timeInterval;
+@property (nonatomic, assign) CGFloat alpha;
 @property (nonatomic, assign) BOOL repeat;
 
 - (instancetype)initWithFrame:(CGRect)frame texts:(NSArray *)textsArr direction:(ScrollDirectType) direction;

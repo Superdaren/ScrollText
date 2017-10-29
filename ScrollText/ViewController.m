@@ -21,7 +21,7 @@
     [super viewDidLoad];
     
     ScrollText *label = [[ScrollText alloc] initWithFrame:CGRectMake(0, 255, kScreenWidth, 40) texts:[self getScanningString] direction:ScrollDirectDownType];
-    label.timeInterval = 0.1;
+    label.timeInterval = 1;
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:16];

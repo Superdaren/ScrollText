@@ -8,8 +8,6 @@
 
 #import "ScrollText.h"
 
-const NSTimeInterval BeginTime = 1.0;
-
 #define width self.bounds.size.width
 #define height (self.bounds.size.height / 2)
 
@@ -32,12 +30,6 @@ const NSTimeInterval BeginTime = 1.0;
 
 @implementation ScrollText
 
-
-@synthesize textsArr = _textsArr;
-@synthesize textColor = _textColor;
-@synthesize font = _font;
-@synthesize textAlignment = _textAlignment;
-@synthesize timeInterval = _timeInterval;
 
 - (instancetype)initWithTextsArr:(NSArray *)textsArr {
     if (self = [super init]) {
@@ -106,7 +98,8 @@ const NSTimeInterval BeginTime = 1.0;
     self.textColor = [UIColor blackColor];
     self.textAlignment = NSTextAlignmentCenter;
     self.textsArr = textsArr;
-    self.timeInterval = 3;
+    self.timeInterval = 6;
+    self.alpha = 0.3;
 }
 
 - (void)startCycling
@@ -148,7 +141,7 @@ const NSTimeInterval BeginTime = 1.0;
             label3.alpha = 1;
         }
         
-        label4.alpha = 0.3;
+        label4.alpha = self.alpha;
         
         if (!self.repeat && _index >= _textsArr.count) {
             return;
@@ -169,23 +162,18 @@ const NSTimeInterval BeginTime = 1.0;
         
         if (_index < _textsArr.count) {
             label1.text = _textsArr[_index];
-            label1.alpha = 0.3;
+            label1.alpha = self.alpha;
         } else {
             label1.text = _textsArr[0];
-            label1.alpha = 0.3;
+            label1.alpha = self.alpha;
         }
     }];
     _index += 1;
-    [self performSelector:@selector(startCycling) withObject:nil afterDelay:_interval];
+    [self performSelector:@selector(startCycling) withObject:nil afterDelay:self.timeInterval];
 }
 
 
 #pragma mark - setter
-- (void)setTimeInterval:(NSTimeInterval)timeInterval {
-    _timeInterval = timeInterval;
-    _interval = BeginTime + _timeInterval;
-}
-
 - (void)setTextColor:(UIColor *)textColor {
     _textColor = textColor;
     self.label1.textColor = _textColor;
@@ -214,21 +202,6 @@ const NSTimeInterval BeginTime = 1.0;
     }
     
     return _labels;
-}
-
-#pragma mark - getter
-
-- (UIColor *)textColor {
-    return self.label1.textColor;
-}
-- (NSTextAlignment)textAlignment {
-    return self.label1.textAlignment;
-}
-- (UIFont *)font {
-    return self.label1.font;
-}
-- (NSTimeInterval)timeInterval {
-    return _interval - BeginTime;
 }
 
 @end
